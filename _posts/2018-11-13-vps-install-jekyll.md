@@ -88,9 +88,16 @@ jekyll build
 ~~~bash
 JEKYLL_ENV=developments jekyll build
 ~~~
+
+## 本地预览
+Jekyll 集成了一个开发用的服务器，可以让你使用浏览器在本地进行预览。
+
+通过 `bundle exec jekyll serve` 命令启动开发服务器，然后你就可以访问 `http://localhost:4000/` 预览你的网站了。
+
+
 ## Nginx安装与配置
 ### Nginx安装
-我的服务器在[V2ray搭建](https://xresearcher.com/2018/11/12/v2ray.html)时已经安装了Nginx，不需要再安装，网上的安装教程挺多，就不赘述，可以参考文章[^54321], [^54322]
+我的服务器在[V2ray搭建](https://blog.xresearcher.com/2018/11/12/v2ray.html)时已经安装了Nginx，不需要再安装，网上的安装教程挺多，就不赘述，可以参考文章[^54321], [^54322]
 
 [^54321]: [用 Jekyll/Nginx/Let'sEncrypt 搭建一个博客站点](https://tomisacat.xyz/tech/2017/02/27/Deploy-a-blog-site-with-Jekyll-and-Nginx.html)
 
