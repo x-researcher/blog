@@ -52,7 +52,7 @@ jupyter notebook --generate-config
 ~~~
 
 内容修改为：
-~~~bash
+~~~json
 c = get_config()
 
 #所有matplotlib的图像都通过iline的方式显示
