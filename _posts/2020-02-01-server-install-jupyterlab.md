@@ -74,7 +74,7 @@ c.NotebookApp.trust_xheaders = True
 生成SSL证书
 ~~~bash
 ~/.acme.sh/acme.sh --issue -d jupyter.XXXXXX.com --standalone -k ec-256 --force
-~/.acme.sh/acme.sh --installcert -d jupyter.xresearcher.com --fullchainpath /root/.ipython/profile_nbserver/jupyter.crt --keypath /root/.ipython/profile_nbserver/jupyter.key --ecc
+~/.acme.sh/acme.sh --installcert -d jupyter.XXXXXX.com --fullchainpath /root/.ipython/profile_nbserver/jupyter.crt --keypath /root/.ipython/profile_nbserver/jupyter.key --ecc
 ~~~
 ## 配置nginx
 创建文件`/etc/nginx/conf/conf.d/jupyter.conf`，内容为：
@@ -82,7 +82,7 @@ c.NotebookApp.trust_xheaders = True
 #仅供参考
 #Jupyter lab website
 server {
-    server_name jupyter.xresearcher.com;
+    server_name jupyter.XXXXXX.com;
     listen 80;
     location / {
         proxy_pass http://127.0.0.1:8888/;
@@ -102,7 +102,7 @@ server {
         ssl_certificate_key   /root/.ipython/profile_nbserver/jupyter.key;
         ssl_protocols         TLSv1 TLSv1.1 TLSv1.2;
         ssl_ciphers           HIGH:!aNULL:!MD5;
-        server_name jupyter.xresearcher.com;
+        server_name jupyter.XXXXXX.com;
         location / { proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header Host $http_host;
         proxy_pass https://127.0.0.1:8888; }
