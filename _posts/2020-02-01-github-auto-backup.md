@@ -35,7 +35,7 @@ cd /root/JupyterLab/
 git init
 
 #关联到远程github仓库
-git remote add origin git@github.com:x-researcher/JupyterLabBackup.git
+git remote add origin git@github.com:xxxxxx/JupyterLabBackup.git
 ~~~
 ## 初次备份
 ~~~bash
