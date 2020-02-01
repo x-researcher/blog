@@ -4,7 +4,7 @@ tags:  Jupyter系列
 date:   2020-02-01 01:00:00 +0800
 key: serverinstallJupyterLab
 ---
-服务器部署JupyterLab系列文章：（一）
+`服务器部署JupyterLab系列文章：（一）`{:.error}
 
 <!--more-->
 本文以`Debian9`为例。

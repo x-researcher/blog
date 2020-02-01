@@ -4,7 +4,7 @@ tags:  Jupyter系列 Linux fonts
 date:   2020-02-01 03:00:00 +0800
 key: serverlinuxfonts
 ---
-服务器部署JupyterLab系列文章：（三）
+`服务器部署JupyterLab系列文章：（三）`{:.error}
 
 <!--more-->
 ## 创建字体文件夹

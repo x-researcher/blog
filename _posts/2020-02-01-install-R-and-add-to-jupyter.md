@@ -4,7 +4,7 @@ tags:  Jupyter系列 R
 date:   2020-02-01 02:00:00 +0800
 key: installrandaddtojupyter
 ---
-服务器部署JupyterLab系列文章：（二）
+`服务器部署JupyterLab系列文章：（二）`{:.error}
 
 <!--more-->
 
