@@ -1,6 +1,6 @@
 ---
 title: R语言的安装以及添加到Jupyter
-tags:  Jupyter R 
+tags:  Jupyter系列 R 
 date:   2020-02-01 02:00:00 +0800
 key: installrandaddtojupyter
 ---
@@ -29,7 +29,7 @@ apt update
 apt install r-base r-base-dev
 ~~~
 
-# Jupyter Notebook 中添加R内核
+# 添加到Jupyter Notebook
 ~~~R
 R
 >install.packages(c('repr', 'IRdisplay', 'evaluate', 'crayon', 'pbdZMQ', 'devtools', 'uuid', 'digest'))

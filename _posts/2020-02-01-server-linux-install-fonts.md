@@ -1,6 +1,6 @@
 ---
 title: Linux服务器端安装字体
-tags:  Jupyter Linux fonts
+tags:  Jupyter系列 Linux fonts
 date:   2020-02-01 03:00:00 +0800
 key: serverlinuxfonts
 ---

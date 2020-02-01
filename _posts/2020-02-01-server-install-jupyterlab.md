@@ -1,13 +1,13 @@
 ---
 title: 服务器端JupyterLab计算平台的安装
-tags:  Jupyter Lab
+tags:  Jupyter系列
 date:   2020-02-01 01:00:00 +0800
 key: serverinstallJupyterLab
 ---
 服务器部署JupyterLab系列文章：（一）
 
 <!--more-->
-本文以Debian9为例。
+本文以`Debian9`为例。
 # Linux [安装Anaconda](https://docs.anaconda.com/anaconda/install/linux/)
 ~~~bash
 #安装依赖
@@ -22,14 +22,14 @@ bash Anaconda3-2019.10-Linux-x86_64.sh
 ~~~bash
 #创建一个名为nbserver的配置。
 ipython profile create nbserver
-#这将创建一个文件夹，其中包含一些原始的配置文件。我们跳转到这个文件夹进行一些配置
 
+#这将创建一个文件夹，其中包含一些原始的配置文件。我们跳转到这个文件夹进行一些配置
 cd ~/.ipython/profile_nbserver/
 
 #由于ipython Notebook要求https连接，因此我们需要创建一个ssl证书。
 openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
 ~~~
-命令执行后根据提示输入信息就好，当然，这个证书并未获得认证，因此用chrome之类的浏览器访问的时候会得到一些错误信息，这个问题我们一会儿说。接下来我们创建一个密文的密码。
+命令执行后根据提示输入信息就好，当然，这个证书并未获得认证，因此用浏览器访问的时候会得到一些错误信息，这个问题我们一会儿说。接下来我们创建一个密文的密码。
 
 ~~~bash
 #打开 IPython
@@ -45,7 +45,7 @@ Out[2]: 'sha1:4d6044e56b49:e7e80a36f9c15ab9e6a42cca16cddc3818a11a3f'
 输入密码后会输出此密码对应的 hash（格式为 'type:salt:hashed-password'），比如 'sha1:4d6044e56b49:e7e80a36f9c15ab9e6a42cca16cddc3818a11a3f'。记下此 hash 字串，随后会用到。
 
 ## 修改jupyter notebook 配置文件
-查看用户目录 ~/.jupyter 路径下是否存在 jupyter_notebook_config.py 文件。若不存在，使用以下指令生成。
+查看用户目录 `~/.jupyter` 路径下是否存在 `jupyter_notebook_config.py` 文件。若不存在，使用以下指令生成。
 ~~~bash
 #生成配置文件
 jupyter notebook --generate-config
@@ -77,7 +77,7 @@ c.NotebookApp.trust_xheaders = True
 ~/.acme.sh/acme.sh --installcert -d jupyter.xresearcher.com --fullchainpath /root/.ipython/profile_nbserver/jupyter.crt --keypath /root/.ipython/profile_nbserver/jupyter.key --ecc
 ~~~
 ## 配置nginx
-创建文件/etc/nginx/conf/conf.d/jupyter.conf，内容为：
+创建文件`/etc/nginx/conf/conf.d/jupyter.conf`，内容为：
 ~~~bash
 #仅供参考
 #Jupyter lab website
@@ -164,7 +164,7 @@ server {
 }
 ~~~
 ## 添加JupyterLab为系统服务
-将 Jupyter Lab 设定为系统服务并自动启动，创建jupyter.service并放置于/etc/systemctl/system/文件夹下，内容为：
+将 Jupyter Lab 设定为系统服务并自动启动，创建`jupyter.service`并放置于`/etc/systemctl/system/`文件夹下，内容为：
 ~~~bash
 [Unit]
 Description=Jupyterlab
@@ -179,4 +179,4 @@ ExecStart=/root/anaconda3/bin/jupyter lab --config=/root/.jupyter/jupyter_notebo
 WantedBy=multi-user.target
 ~~~
 
-运行: systemctl daemon-reload. 然后 systemctl <start|stop|status> jupyterhub来启动服务。
+运行：`systemctl daemon-reload`. 然后 `systemctl <start|stop|status> jupyter`来启动服务。

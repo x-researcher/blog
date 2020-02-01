@@ -1,10 +1,10 @@
 ---
 title: 利用Github自动备份数据
-tags:  Github SSH Git crontab
+tags:  Github SSH Git crontab Jupyter系列
 date:   2020-02-01 04:00:00 +0800
 key: githubautobackup
 ---
-服务器部署JupyterLab系列文章：（四）
+`服务器部署JupyterLab系列文章：（四）`{:.error}
 
 <!--more-->
 可以利用git功能将重要的数据**自动备份**到`Github的Private仓库`。
