@@ -11,17 +11,38 @@ key: githubautobackup
 
 本文利用此功能实现JupyterLab数据的自动备份。
 # 配置SSH密钥
-我是利用`PuTTY gen`生成的SSH key
+## 生成SSH
+~~~bash
+cd /root/.ssh/
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+#This creates a new ssh key, using the provided email as a label.
+> Generating public/private rsa key pair.
+#When you're prompted to "Enter a file in which to save the key," press Enter. This accepts the default file location.
+> Enter a file in which to save the key (/c/Users/you/.ssh/id_rsa):[Press enter]
+#At the prompt, type a secure passphrase. For more information, see "Working with SSH key passphrases".
+> Enter passphrase (empty for no passphrase): [Type a passphrase]
+> Enter same passphrase again: [Type passphrase again]
+~~~
+`/root/.ssh/` 下就生成了两个文件，`id_rsa`和`id_rsa.pub`
 
-![图1](/photos/ssh-key.png)
-
-将图中标注内容分别添加到[Github公钥](https://github.com/settings/ssh/new)和服务器的`/root/.ssh/`下。
+## 添加到Github公钥
+将`id_rsa.pub`文件中的内容拷贝到[Github公钥](https://github.com/settings/ssh/new)。
 
 修改`id_rsa`的权限，如不修改会出现无法建立连接的问题。
 ~~~bash
 chmod 600 /root/.ssh/id_rsa
 ~~~
-**注意，id_rsa是公钥文件！**
+如果还有连接失败等问题，可尝试修改`/etc/ssh/sshd_config`
+~~~bash
+nano /etc/ssh/sshd_config
+PermitRootLogin prohibit-password to PermitRootLogin yes 
+PasswordAuthentication no to PasswordAuthentication yes
+~~~
+然后重启`ssh`服务:
+~~~bash
+service ssh restart
+~~~
+
 # 建立私人仓库
 先[新建一个仓库](https://github.com/new)用来存放备份文件，名称随意，记得下面一定要勾选`Private`，也就是私人仓库。
 # 配置本地仓库
