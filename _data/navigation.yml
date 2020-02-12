@@ -49,6 +49,10 @@ header:
     url: /archive.html
 
   - titles:
+      en      : &EN ToDoList
+    url: /ToDoList.html
+
+  - titles:
       # @start locale config
       en      : &EN       About
       en-GB   : *EN
