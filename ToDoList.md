@@ -7,6 +7,10 @@ aside:
 key: page-ToDoList
 ---
 # 2020-02
+## 02-11  Tues.  ☁
+- [x] 注册了[西部世界 vps ](https://xbsj7654.space/portal/order/node)，体验一下机场的服务。
+
+**机场体验**：初试用感觉还可以，速度也还行，但是不如自建节点稳点，时时出现网络中断，而且深夜的时候突然大多数节点失灵，可能是暂时没有为我解除使用权限，目前不甚满意，暂时作为备用节点吧。
 ## 02-12  Wed.  ⛅
 - [x] 为两个 VPS 开启 [BBR PLUS](https://github.com/chiakge/Linux-NetSpeed)，速度瞬间得到提升，美滋滋，oh yeah 🤪
 - [x] 测试，并制作 [ToDoList](https://xresearcher.com/ToDoList.html) 页面
