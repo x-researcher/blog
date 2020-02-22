@@ -33,7 +33,7 @@ Gitbook的结构文件保存在master分支里，然后利用Github Action自动
 `Action` -> `set up a workflow yourself` (在右上部分) 
 
 文件名保存为 `gitbook_action.yml`，文件保存在 `/.github/workflows/` 下，内容为：
-~~~yaml
+~~~txt
 # You must put this in your repo master branch  as repo/.github/workflow/gitbook_action.yml
 # You must add the following secrets in your Secrets(repo->Setting->Secrets->Add a new secret)  
 # Name:   GIT_NAME              Value:  your git name like ZanderZhao
