@@ -186,4 +186,7 @@ git commit -m  "Gitbook update"
 git push origin gh-pages
 ~~~
 
-目前有一个小问题，`gitbook build` 之后，命令行就关闭了，不执行下面的自动提交到GitHub仓库的指令，所以只能写成两个文件，一个运行后再运行下一个。因为对windows下批处理文件的编写不甚了解，所以还不能把两个文件合成一个，这是目前知识上的缺陷，希望将来能解决。
+# 利用 Github 的 Action 功能完成自动部署
+>2020年02月22日修改
+
+学习的过程中，发现可以利用`Action`功能完成`Gitbook`的静态网页自动部署到`gh-pages`分支的操作，十分方便，实现方法见[下一篇博文](https://blog.xresearcher.com/2020/02/22/gitbook-action.html)。
