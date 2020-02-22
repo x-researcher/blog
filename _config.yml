@@ -56,8 +56,8 @@ author:
 
 ## => GitHub Repository (if the site is hosted by GitHub)
 ##############################
-repository: user_name/repo_name
-repository_tree: master
+repository: x-researcher/blog
+repository_tree: gh-pages
 
 
 ## => Paths
@@ -182,7 +182,7 @@ analytics:
 ##############################
 markdown    : kramdown
 highlighter : rouge
-permalink   : date
+permalink   : date # date (default), pretty, ordinal, weekdate, none. https://jekyllrb.com/docs/permalinks/#built-in-formats
 
 exclude:
   - CHANGELOG.md
