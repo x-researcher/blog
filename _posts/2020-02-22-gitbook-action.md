@@ -30,18 +30,18 @@ Gitbook的结构文件保存在master分支里，然后利用Github Action自动
 
 ![](/photos/github-add-secret.png)
 # 2. 创建 Action 文件
-`Action` -> `set up a workflow yourself` (在右上部分) 
+`Action` -> `set up a workflow yourself` (在右上部分)
 
 文件名保存为 `gitbook_action.yml`，文件保存在 `/.github/workflows/` 下，内容为：
 ~~~yml
 # You must put this in your repo master branch  as repo/.github/workflow/gitbook_action.yml
-# You must add the following secrets in your Secrets(repo->Setting->Secrets->Add a new secret)  
+# You must add the following secrets in your Secrets(repo->Setting->Secrets->Add a new secret)
 # Name:   GIT_NAME              Value:  your git name like ZanderZhao
 # Name:   GIT_EMAIL             Value:  your git email like example@exp.com
 # Name:   THE_GITHUB_TOKEN      Value:  you can git it from Settings->Developer settings->Personal access tokens->Generate new token
 # Name:   THE_GITHUB_REF        Value:  github.com/your_name/your_repo_name.git
 # Name:   RES_FOR_PAGES         Value:  put the branch name here like gh-pages,where the build book you want put for
-# Pay attention，THE_GITHUB_REF can't add https:// before, 
+# Pay attention，THE_GITHUB_REF can't add https:// before,
 # And RES_FOR_PAGES must be create and be set as pages before.
 # When you make THE_GITHUB_TOKEN ,the push permission is must have，the others, you can add.
 # You can visit https://zlogs.net/gitbook-action/ for more information.
@@ -50,7 +50,7 @@ name: 'Gitbook Action'
 
 on:
   push:
-    branches:    
+    branches:
       - master
 
 jobs:
@@ -86,7 +86,8 @@ jobs:
       env:
         CI: true
 ~~~
-
+不知道为什么（好像是大括号与`Liquid`语法冲突🙃），上面的内容显示有些问题，**\{\{ \}\}** 及其里面的内容没有显示，具体的文件内容请参考[原库文件](https://github.com/x-researcher/blog/blob/gh-pages/_posts/2020-02-22-gitbook-action.md#2-%E5%88%9B%E5%BB%BA-action-%E6%96%87%E4%BB%B6)。
+{:.warning}
 # 3. Action的自动运行
 根目录下面的`README.md`和`SUMMARY.md`是必须的，如果需要个性化配置可以添加`book.json`，另外也可以添加`CNAME`文件以指定域名。
 
