@@ -1,34 +1,34 @@
 ---
-title: Gitbook安装及部署指南
-tags:  Gitbook Github bat脚本
+title: Gitbook 安装及部署指南
+tags:  Gitbook Github bat 脚本
 date:   2020-02-02 20:00:00 +0800
 key: gitbooktutorials
 ---
-`Gitbook`在系统整理知识体系时，有很大的便利。
+`Gitbook` 在系统整理知识体系时，有很大的便利。
 
 <!--more-->
 
-本文探讨的是`Windows10` 操作系统下 `Gitbook` 的使用方法。
+本文探讨的是 `Windows10` 操作系统下 `Gitbook` 的使用方法。
 # 安装 nodejs
-前往[官网](https://nodejs.org/en/)下载安装，npm已集成在node里，结束后查看是否安装成功：
+前往 [官网](https://nodejs.org/en/) 下载安装，npm 已集成在 node 里，结束后查看是否安装成功：
 ~~~shell
 node -v
 npm -v
 ~~~
 # 安装 Gitbook
-cmd控制台输入如下命令：
+cmd 控制台输入如下命令：
 ~~~bash
 npm install gitbook-cli -g
 
 #查看安装的版本
 gitbook -V
 ~~~
-如果没有安装`git`，也要补上：
-下载[程序](https://git-scm.com/download/win)，依步骤安装。
+如果没有安装 `git`，也要补上：
+下载 [程序](https://git-scm.com/download/win)，依步骤安装。
 # 安装 Gitbook editor windows 客户版
-目前，官网的下载链接已经失效，推测官方已经放弃该客户端，此软件对新手比较友好，但`不推荐作为主力工具`。
+目前，官网的下载链接已经失效，推测官方已经放弃该客户端，此软件对新手比较友好，但 `不推荐作为主力工具`。
 
-安装包可自行搜索`百度网盘`的分享，名字为`GitBook.Editor.Setup.exe`，此处暂不提供下载链接。
+安装包可自行搜索 `百度网盘` 的分享，名字为 `GitBook.Editor.Setup.exe`，此处暂不提供下载链接。
 # 生成新的 Gitbook 文件
 ## 使用 window 客户端
 软件没必要登录，直接新建即可，捣腾两下就会了，此处不详细介绍😝。
@@ -40,10 +40,10 @@ cd .\test\
 
 #初始化
 gitbook init
->warn: no summary file in this book
->info: create README.md
->info: create SUMMARY.md
->info: initialization is finished
+> warn: no summary file in this book
+> info: create README.md
+> info: create SUMMARY.md
+> info: initialization is finished
 
 #文件夹下生成了两个文件
 dir
@@ -123,12 +123,12 @@ dir
 ~~~
 
 配置文件一看就明白，只简单说两点：
-- "links" ，在gitbook目录上方添加一些其他的链接；
+- "links" ，在 gitbook 目录上方添加一些其他的链接；
 - "plugins" 和 "pluginsconfig"，添加插件和插件的配置文件。
 
-至于插件如何配置以及使用规范，可Google搜索 `gitbook-plugins-$NAME`， 例如 `todo`的使用规范见如下[网站](https://www.npmjs.com/package/gitbook-plugin-todo)。
+至于插件如何配置以及使用规范，可 `Google` 搜索 `gitbook-plugins-$NAME`， 例如 `todo` 的使用规范见如下 [网站](https://www.npmjs.com/package/gitbook-plugin-todo)。
 
-配置文件修改后，在gitbook的根目录下，运行指令 `gitbook install` 来自动安装插件。
+配置文件修改后，在 `gitbook` 的根目录下，运行指令 `gitbook install` 来自动安装插件。
 # 编辑 Gitbook
 ## 预览 Gitbook
 ~~~shell
@@ -156,37 +156,37 @@ xcopy D:\YOUR-GITBOOK-PATH\_book\*.* D:\YOUR-GITHUB-PATH\ /E /W /Y
 ## 推送到 Github 仓库
 之前用的是 `Github客户端` ，其实习惯之后发现，还是命令行方便😁：
 ~~~bash
-#在Github仓库的目录下运行
+#在 Github 仓库的目录下运行
 git add .
 git commit -m "更新说明，随便写"
 git push origin gh-pages
 ~~~
 成功后即可进入相应的 Github Pages 页面查看，大功告成。
 # 批处理指令总结
-gitbook和github使用习惯了之后，会越来越喜欢命令行，毕竟可以使用脚本，现将常用脚本总结如下：
+`gitbook` 和 `github` 使用习惯了之后，会越来越喜欢命令行，毕竟可以使用脚本，现将常用脚本总结如下：
 ## 生成静态网页
 文件名为 `编译gitbook.bat`
 ~~~batch
 cd /d D:\YOUR-GITBOOK-PATH\
 gitbook build
 ~~~
-## 自动上传到Github 仓库
+## 自动上传到 Github 仓库
 文件名为 `AutoSubmitToGithub.bat`
 ~~~batch
-rem 切换到gh-pages分支
+rem 切换到 gh-pages 分支
 cd /d D:\YOUR-Github-PATH\
 git checkout gh-pages
 
-rem 拷贝_book文件到gh-pages
+rem 拷贝_book 文件到 gh-pages
 xcopy D:\YOUR-GITBOOK-PATH\_book\*.* D:\YOUR-GITHUB-PATH\ /E /W /Y
 
-rem 提交到GitHub仓库
+rem 提交到 GitHub 仓库
 git add .
 git commit -m  "Gitbook update"
 git push origin gh-pages
 ~~~
 
 # 利用 Github 的 Action 功能完成自动部署
->2020年02月22日修改
+> 2020 年 02 月 22 日修改
 
-学习的过程中，发现可以利用`Action`功能完成`Gitbook`的静态网页自动部署到`gh-pages`分支的操作，十分方便，实现方法见[下一篇博文](https://blog.xresearcher.com/2020/02/22/gitbook-action.html)。
+学习的过程中，发现可以利用 `Action` 功能完成 `Gitbook` 的静态网页自动部署到 `gh-pages` 分支的操作，十分方便，实现方法见 [下一篇博文](https://blog.xresearcher.com/2020/02/22/gitbook-action.html)。
