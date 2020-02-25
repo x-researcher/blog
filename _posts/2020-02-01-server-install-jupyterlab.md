@@ -124,6 +124,7 @@ server {
 >Reference:
 >- [https://gist.github.com/paparaka/294450b727c2aa5455e7125f695e54ed](https://medium.com/@nedjalkov.ivan.j/jupyter-lab-behind-a-nginx-reverse-proxy-the-docker-way-8f8d825a2336)
 >- [Github Gist](https://gist.github.com/paparaka/294450b727c2aa5455e7125f695e54ed).
+
 ## 添加 JupyterLab 为系统服务
 将 `Jupyter Lab` 设定为系统服务并自动启动，创建 `jupyter.service` 并放置于 `/etc/systemctl/system/` 文件夹下，内容为：
 ~~~bash
