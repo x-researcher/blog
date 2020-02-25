@@ -7,7 +7,9 @@ key: serverinstallJupyterLab
 `服务器部署JupyterLab系列文章：（一）`{:.error}
 
 <!--more-->
-本文以`Debian9`为例。
+>2020-02-25 更新，规范了 `jupyter.conf` 的书写格式。
+
+本文以 `Debian9` 为例。
 # Linux [安装Anaconda](https://docs.anaconda.com/anaconda/install/linux/)
 ~~~bash
 #安装依赖
@@ -17,8 +19,8 @@ wget https://repo.anaconda.com/archive/Anaconda3-2019.10-Linux-x86_64.sh
 #安装Anaconda
 bash Anaconda3-2019.10-Linux-x86_64.sh
 ~~~
-# 配置Jupyter
-## 创建nbserver
+# 配置 Jupyter
+## 创建 nbserver
 ~~~bash
 #创建一个名为nbserver的配置。
 ipython profile create nbserver
@@ -42,9 +44,9 @@ Enter password:123456
 Verify password:123456
 Out[2]: 'sha1:4d6044e56b49:e7e80a36f9c15ab9e6a42cca16cddc3818a11a3f'
 ~~~
-输入密码后会输出此密码对应的 hash（格式为 'type:salt:hashed-password'），比如 'sha1:4d6044e56b49:e7e80a36f9c15ab9e6a42cca16cddc3818a11a3f'。记下此 hash 字串，随后会用到。
+输入密码后会输出此密码对应的 `hash`（格式为 `'type:salt:hashed-password'`），比如 `'sha1:4d6044e56b49:e7e80a36f9c15ab9e6a42cca16cddc3818a11a3f'`。记下此 `hash` 字串，随后会用到。
 
-## 修改jupyter notebook 配置文件
+## 修改 jupyter notebook 配置文件
 查看用户目录 `~/.jupyter` 路径下是否存在 `jupyter_notebook_config.py` 文件。若不存在，使用以下指令生成。
 ~~~bash
 #生成配置文件
@@ -71,12 +73,12 @@ c.NotebookApp.allow_root = True
 c.NotebookApp.trust_xheaders = True
 ~~~
 ## 设置域名
-生成SSL证书
+生成 `SSL` 证书
 ~~~bash
 ~/.acme.sh/acme.sh --issue -d jupyter.XXXXXX.com --standalone -k ec-256 --force
 ~/.acme.sh/acme.sh --installcert -d jupyter.XXXXXX.com --fullchainpath /root/.ipython/profile_nbserver/jupyter.crt --keypath /root/.ipython/profile_nbserver/jupyter.key --ecc
 ~~~
-## 配置nginx
+## 配置 Nginx
 创建文件`/etc/nginx/conf/conf.d/jupyter.conf`，内容为：
 ~~~bash
 #仅供参考
@@ -106,65 +108,24 @@ server {
         location / { proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header Host $http_host;
         proxy_pass https://127.0.0.1:8888; }
-        location /api/kernels/ {
-        proxy_pass            https://127.0.0.1:8888;
-        proxy_set_header      Host $host;
-        # websocket support
-        proxy_http_version    1.1;
-        proxy_set_header      Upgrade "websocket";
-        proxy_set_header      Connection "Upgrade";
-        proxy_read_timeout    86400;
-    }
-        location /lab/api/sessions/ {
-        proxy_pass            https://127.0.0.1:8888;
-        proxy_set_header      Host $host;
-        # websocket support
-        proxy_http_version    1.1;
-        proxy_set_header      Upgrade "websocket";
-        proxy_set_header      Connection "Upgrade";
-        proxy_read_timeout    86400;
-    }
-        location /lab/api/build/ {
-        proxy_pass            https://127.0.0.1:8888;
-        proxy_set_header      Host $host;
-        # websocket support
-        proxy_http_version    1.1;
-        proxy_set_header      Upgrade "websocket";
-        proxy_set_header      Connection "Upgrade";
-        proxy_read_timeout    86400;
-    }
-        location /nbconvert/ipynb/ {
-        proxy_pass            https://127.0.0.1:8888;
-        proxy_set_header      Host $host;
-        # websocket support
-        proxy_http_version    1.1;
-        proxy_set_header      Upgrade "websocket";
-        proxy_set_header      Connection "Upgrade";
-        proxy_read_timeout    86400;
-    }
-        location /nbconvert/html/ {
-        proxy_pass            https://127.0.0.1:8888;
-        proxy_set_header      Host $host;
-        # websocket support
-        proxy_http_version    1.1;
-        proxy_set_header      Upgrade "websocket";
-        proxy_set_header      Connection "Upgrade";
-        proxy_read_timeout    86400;
-    }
-        location /terminals/websocket/ {
-        proxy_pass            https://127.0.0.1:8888;
-        proxy_set_header      Host $host;
-        # websocket support
-        proxy_http_version    1.1;
-        proxy_set_header      Upgrade "websocket";
-        proxy_set_header      Connection "Upgrade";
-        proxy_read_timeout    86400;
-    }
 
+        location ~* /(api/kernels/[^/]+/(channels|iopub|shell|stdin)|terminals/websocket)/? {
+        proxy_pass            https://127.0.0.1:8888;
+        proxy_set_header      Host $host;
+        # websocket support
+        proxy_http_version    1.1;
+        proxy_set_header      Upgrade "websocket";
+        proxy_set_header      Connection "Upgrade";
+        proxy_read_timeout    86400;
+        }
 }
 ~~~
-## 添加JupyterLab为系统服务
-将 Jupyter Lab 设定为系统服务并自动启动，创建`jupyter.service`并放置于`/etc/systemctl/system/`文件夹下，内容为：
+
+>Reference:
+>- [https://gist.github.com/paparaka/294450b727c2aa5455e7125f695e54ed](https://medium.com/@nedjalkov.ivan.j/jupyter-lab-behind-a-nginx-reverse-proxy-the-docker-way-8f8d825a2336)
+>- [Github Gist](https://gist.github.com/paparaka/294450b727c2aa5455e7125f695e54ed).
+## 添加 JupyterLab 为系统服务
+将 `Jupyter Lab` 设定为系统服务并自动启动，创建 `jupyter.service` 并放置于 `/etc/systemctl/system/` 文件夹下，内容为：
 ~~~bash
 [Unit]
 Description=Jupyterlab
@@ -179,4 +140,4 @@ ExecStart=/root/anaconda3/bin/jupyter lab --config=/root/.jupyter/jupyter_notebo
 WantedBy=multi-user.target
 ~~~
 
-运行：`systemctl daemon-reload`. 然后 `systemctl <start|stop|status> jupyter`来启动服务。
+运行：`systemctl daemon-reload` . 然后 `systemctl <start|stop|status> jupyter` 来启动服务。
